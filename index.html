@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>To-Do List</title>
+   <style>
+       
+        body{
+            background-image: url(https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .main{
+            width: 600px;
+            margin: 100px auto;
+            text-align: center;
+            box-shadow: 0 0 20px black;
+            padding: 30px;
+            background: wheat;
+           border-radius: 25px;
+           height: auto;
+        }
+        div{
+            text-align: center;
+            padding-left: 70px;
+            padding-bottom: 10px;
+        }   
+        button{
+            margin-left: 10px;
+            border-radius: 25px;
+            font-size: 15px;
+        }
+        button:hover{
+            background-color:rgb(124, 6, 6);
+        }
+        h1{
+            color: red;
+            font-size: 50px;
+        }
+        input{
+            border-radius: 15px;
+            font-size: 21px;
+            padding:2px;
+        }
+        label{
+            font-size: 35px;
+            color: yellowgreen;
+        }
+
+   </style>
+</head>
+
+<body>
+    <div class="main">
+    <h1>To-do List</h1>
+    <div class="inputDiv">
+    	 <label> Enter Text:</label> <input type="text" class="input">
+    	   <button class="add">Add New </button><br>
+           <span id="error"></span>
+    </div>
+    <div class="list">
+    </div>
+</div> 
+<script>
+        const list = document.querySelector('.list');
+        var inputValue = document.querySelector('.input');
+        const add = document.querySelector('.add');
+        class item{
+            constructor(name){
+            this.createItem(name);
+        }
+            createItem(name){ 
+            var itemBox = document.createElement('div');
+            itemBox.classList.add('item');
+            var input = document.createElement('input');
+            input.type = "text";
+            input.disabled = true;
+            input.value = name;
+            input.classList.add('item_input');
+            var edit = document.createElement('button');
+            edit.classList.add('edit');
+            edit.innerHTML = "Edit";
+            edit.addEventListener('click', () => this.edit(input, name));
+            var remove = document.createElement('button');
+            remove.classList.add('remove');
+            remove.innerHTML = "Remove";
+            remove.addEventListener('click', () => this.remove(itemBox, name));
+            list.appendChild(itemBox);
+            itemBox.appendChild(input);
+            itemBox.appendChild(edit);
+            itemBox.appendChild(remove);
+
+    }
+
+    edit(input, name){
+    if(input.disabled == true){
+   input.disabled = !input.disabled;
+    }
+    else{
+    input.disabled = !input.disabled;   
+    }
+    }
+
+    remove(itemBox, name){
+    itemBox.parentNode.removeChild(itemBox);
+     }
+}
+
+    add.addEventListener('click', check);
+    window.addEventListener('keydown', (e) => {
+    if(e.which == 13){
+    check();
+    }
+})
+
+    function check(){
+    if(inputValue.value=="")
+    {
+        document.getElementById("error").innerHTML="Please Enter the value";
+        return;
+    } else
+    {
+        document.getElementById("error").innerHTML="";
+        new item(inputValue.value);
+    }
+}
+    for (var v = 0 ; v < input.length ; v++){
+    new item(input[v]);
+}
+</script>
+            
+</body>
+</html>
